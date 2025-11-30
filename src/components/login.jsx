@@ -1,36 +1,22 @@
-import { useState } from "react";
-
-export default function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = async () => {
-    const res = await fetch("http://localhost:8080/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    });
-    const data = await res.json();
-    if (data.token) {
-      localStorage.setItem("token", data.token);
-      alert("Login successfully");
-    }
-  };
+import "../CSS/login.css";
+function Login() {
   return (
-    <div>
-      <h2>
-        <p>Login</p>
-        <input
-          placeholder="Username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          placeholder="Password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button onClick={handleLogin}>Login</button>
-      </h2>
-    </div>
+    <>
+      <form className="login-form">
+        <h1>Sign in</h1>
+        <label htmlFor="text">Username</label>
+        <input type="text" placeholder="Enter Username"></input>
+        <br />
+        <label htmlFor="password">Password</label>
+        <input type="password" placeholder="Enter Password"></input>
+        <button type="submit" className="log_in_button">
+          Sign In
+        </button>
+        <p className="don_have_account">
+          Don't have an account? <a href="./register">Sign up</a>
+        </p>
+      </form>
+    </>
   );
 }
+export default Login;
