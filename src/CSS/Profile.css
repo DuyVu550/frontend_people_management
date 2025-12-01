@@ -1,4 +1,4 @@
-.update-profile-form {
+.profile-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,21 +8,21 @@
   width: 600px;
   height: 800px;
 }
-.update-profile-form div {
+.profile-form div {
   display: flex;
   flex-direction: row;
   margin: 0;
 }
-.update-profile-form h1 {
+.profile-form h1 {
   font-size: 100;
   margin-bottom: 10px;
   margin-right: 250px;
 }
-.update-profile-form .profile-header {
+.profile-form .profile-header {
   font-weight: 100;
-  margin-bottom: 55px;
+  margin-bottom: 30px;
 }
-.update-profile-form .log-out-btn {
+.profile-form .back-btn {
   height: 40px;
   width: 100px;
   border-radius: 20px;
@@ -33,39 +33,37 @@
   margin-top: 10px;
   cursor: pointer;
 }
-.update-profile-form .log-out-btn:hover {
+.profile-form .back-btn:hover {
   background-color: #690a0a;
 }
 .avatar-image {
   height: 150px;
   width: 150px;
   border-radius: 75px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
-.update-profile-form label {
+.profile-form label {
   border-left: #3d26c1;
   font-size: large;
   font-weight: bold;
   padding-top: 15px;
 }
-.update-profile-form input {
+.profile-form span {
+  padding-top: 20px;
   flex-direction: column;
   border: 2px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   height: 45px;
   width: 300px;
-  margin-left: 85px;
+  margin-left: 80px;
   margin-bottom: 20px;
   font-size: 18px;
 }
-.update-profile-form .username-input {
+.profile-form .username-span {
   margin-left: 75px;
 }
-.update-profile-form .name-input {
+.profile-form .name-span {
   margin-left: 110px;
-}
-.update-profile-form .avatar-input {
-  margin-left: 75px;
 }
 .save-btn {
   height: 40px;

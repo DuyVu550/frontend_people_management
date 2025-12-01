@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import Register from "./components/register.jsx";
 import Login from "./components/login.jsx";
 import UpdateProfile from "./components/updateProfile.jsx";
+import Profile from "./components/profile.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

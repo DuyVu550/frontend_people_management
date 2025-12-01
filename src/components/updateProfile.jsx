@@ -3,10 +3,10 @@ import mcImage from "../assets/Manchester_City.png";
 function UpdateProfile() {
   return (
     <>
-      <form className="profile-form">
+      <form className="update-profile-form">
         <div className="profile-header">
           <h1>Update Profile</h1>
-          <button className="back-btn">Back</button>
+          <button className="log-out-btn">Log out</button>
         </div>
         <div>
           <label type="text">Username:</label>
