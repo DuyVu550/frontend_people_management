@@ -7,7 +7,7 @@
   width: 400px;
   border-radius: 20px;
   border: 2px solid rgba(0, 0, 0, 0.1);
-  height: 500px;
+  height: 600px;
 }
 .register-form label {
   font-size: 20px;
@@ -35,6 +35,7 @@
   color: white;
   font-size: 20px;
   margin-top: 10px;
+  cursor: pointer;
 }
 .register-form button:hover {
   background-color: #0a92b8;
