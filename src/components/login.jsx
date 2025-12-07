@@ -23,10 +23,8 @@ function Login() {
       );
       alert("Login successfully");
       console.log("Login successfully", logindata);
-      if (response.data.result.token) {
-        localStorage.setItem("token", response.data.result.token);
-        localStorage.setItem("username", logindata.username);
-      }
+      localStorage.setItem("token", response.data.result.token);
+      localStorage.setItem("username", logindata.username);
       navigate("/profile");
     } catch (e) {
       alert("username or password wrong");

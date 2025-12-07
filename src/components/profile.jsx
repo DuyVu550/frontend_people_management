@@ -35,6 +35,13 @@ function Profile() {
   const updateProfileSubmit = () => {
     navigate("/updateProfile");
   };
+  localStorage.setItem("age", user.age);
+  localStorage.setItem("address", user.address);
+  localStorage.setItem(
+    "avatar",
+    `https://cdn.jsdelivr.net/gh/DuyVu550/cdn@main/${user.avatar}`
+  );
+  localStorage.setItem("name", user.name);
   return (
     <>
       <form className="profile-form">
@@ -44,7 +51,11 @@ function Profile() {
             Back
           </button>
         </div>
-        <img src={user.avatar} alt="" className="avatar-image" />
+        <img
+          src={`https://cdn.jsdelivr.net/gh/DuyVu550/cdn@main/${user.avatar}`}
+          alt=""
+          className="avatar-image"
+        />
         <div>
           <label type="text">Username</label>
           <span className="username-span">{user.username}</span>

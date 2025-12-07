@@ -11,14 +11,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 function UpdateProfile() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [address, setAddress] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const [username, setUsername] = useState(localStorage.getItem("username"));
+  const [name, setName] = useState(localStorage.getItem("name"));
+  const [age, setAge] = useState(localStorage.getItem("age"));
+  const [address, setAddress] = useState(localStorage.getItem("address"));
+  const [avatar, setAvatar] = useState(localStorage.getItem("avatar"));
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
+    localStorage.clear();
     navigate("/");
   };
   const updateProfileSubmit = async () => {
@@ -62,7 +61,7 @@ function UpdateProfile() {
           <input
             type="text"
             className="username-input"
-            placeholder="vu123"
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
           ></input>
         </div>
@@ -71,7 +70,7 @@ function UpdateProfile() {
           <input
             type="text"
             className="name-input"
-            placeholder="Nguyen Vu"
+            value={name}
             onChange={(e) => setName(e.target.value)}
           ></input>
         </div>
@@ -80,7 +79,7 @@ function UpdateProfile() {
           <input
             type="text"
             className="birthday-input"
-            placeholder="18"
+            value={age}
             onChange={(e) => setAge(e.target.value)}
           ></input>
         </div>
@@ -89,7 +88,7 @@ function UpdateProfile() {
           <input
             type="text"
             className="address-input"
-            placeholder="262/3 Luy Ban bich"
+            value={address}
             onChange={(e) => setAddress(e.target.value)}
           ></input>
         </div>
@@ -98,11 +97,14 @@ function UpdateProfile() {
           <input
             type="file"
             className="avatar-input"
-            placeholder="https://example.com/your-avatar.jpg"
-            onChange={(e) => setAvatar(e.target.value)}
+            onChange={(e) => setAvatar(e.target.files[0])}
           ></input>
         </div>
-        <img src={mcImage} alt="" className="avatar-image" />
+        <img
+          src={localStorage.getItem("avatar")}
+          alt=""
+          className="avatar-image"
+        />
         <button
           type="submit"
           className="save-btn"
