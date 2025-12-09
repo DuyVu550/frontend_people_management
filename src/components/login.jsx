@@ -11,16 +11,14 @@ import {
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const API_KEY = import.meta.env.VITE_API_KEY;
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle login logic here
     try {
       const logindata = { username, password };
-      const response = await axios.post(
-        "http://localhost:8080/auth/login",
-        logindata
-      );
+      const response = await axios.post(`${API_KEY}/auth/login`, logindata);
       alert("Login successfully");
       console.log("Login successfully", logindata);
       localStorage.setItem("token", response.data.result.token);
@@ -34,30 +32,47 @@ function Login() {
 
   return (
     <>
-      <form className="login-form">
-        <h1>Sign in</h1>
-        <label htmlFor="text">Username</label>
-        <input
-          type="text"
-          placeholder="Enter Username"
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        ></input>
-        <br />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        ></input>
-        <button type="submit" className="log_in_button" onClick={handleSubmit}>
-          Sign In
-        </button>
-        <p className="don_have_account">
-          Don't have an account? <Link to="/register">Sign up</Link>
-        </p>
-      </form>
+      <div
+        className="d-flex justify-content-center align-items-center vh-100"
+        style={{ backgroundColor: "#A1D8F0" }}
+      >
+        <form
+          className="container mt-100 p-4 rounded shadow bg-white"
+          style={{ width: "350px", height: "400px" }}
+        >
+          <h1 className="text-center mb-4">Sign in</h1>
+          <div className="mb-3">
+            <label className="form-label">Username</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter Username"
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            ></input>
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Enter Password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            ></input>
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary w-100"
+            onClick={handleSubmit}
+          >
+            Sign In
+          </button>
+          <p className="text-center mt-3">
+            Don't have an account? <Link to="/register">Sign up</Link>
+          </p>
+        </form>
+      </div>
     </>
   );
 }

@@ -11,8 +11,11 @@ import axios from "axios";
 function Profile() {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
-  const backSubmit = () => {
-    navigate("/updateProfile");
+  const API_KEY = import.meta.env.VITE_API_KEY;
+  const avatarUrl = import.meta.env.VITE_AvatarUrl;
+  const handelLogout = () => {
+    localStorage.clear();
+    navigate("/");
   };
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -22,7 +25,7 @@ function Profile() {
       return;
     }
     axios
-      .get(`http://localhost:8080/users/${username}`, {
+      .get(`${API_KEY}/users/${username}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,49 +40,55 @@ function Profile() {
   };
   localStorage.setItem("age", user.age);
   localStorage.setItem("address", user.address);
-  localStorage.setItem(
-    "avatar",
-    `https://cdn.jsdelivr.net/gh/DuyVu550/cdn@main/${user.avatar}`
-  );
+  localStorage.setItem("avatar", `${avatarUrl}/${user.avatar}`);
   localStorage.setItem("name", user.name);
   return (
     <>
-      <form className="profile-form">
-        <div className="profile-header">
-          <h1>Profile</h1>
-          <button className="back-btn" onClick={backSubmit}>
-            Back
-          </button>
-        </div>
-        <img
-          src={`https://cdn.jsdelivr.net/gh/DuyVu550/cdn@main/${user.avatar}`}
-          alt=""
-          className="avatar-image"
-        />
-        <div>
-          <label type="text">Username</label>
-          <span className="username-span">{user.username}</span>
-        </div>
-        <div>
-          <label type="text">Name:</label>
-          <span className="name-span">{user.name}</span>
-        </div>
-        <div>
-          <label type="text">Age:</label>
-          <span className="address-span">{user.age}</span>
-        </div>
-        <div>
-          <label type="text">Address:</label>
-          <span className="address-span">{user.address}</span>
-        </div>
-        <button
-          type="submit"
-          className="save-btn"
-          onClick={updateProfileSubmit}
+      <div
+        className="d-flex justify-content-center align-items-center vh-100"
+        style={{ backgroundColor: "#A1D8F0" }}
+      >
+        <form
+          className="container mt-100 p-4 rounded shadow bg-white"
+          style={{ width: "400px", height: "450px" }}
         >
-          Update profile
-        </button>
-      </form>
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h1 className="fw-bold m-0">Profile</h1>
+            <button className="btn btn-danger" onClick={handelLogout}>
+              Log out
+            </button>
+          </div>
+          <img
+            src={`${avatarUrl}/${user.avatar}`}
+            alt=""
+            className="rounded-circle d-block mx-auto mb-3"
+            style={{ width: "150px", height: "150px" }}
+          />
+          <div className="mb-2">
+            <span className="fw-bold">Username: </span>
+            <span>{user.username}</span>
+          </div>
+          <div className="mb-2">
+            <span className="fw-bold">Name: </span>
+            <span>{user.name}</span>
+          </div>
+          <div className="mb-2">
+            <span className="fw-bold">Age: </span>
+            <span>{user.age}</span>
+          </div>
+          <div className="mb-2">
+            <span className="fw-bold">Address: </span>
+            <span>{user.address}</span>
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary container-fluid"
+            onClick={updateProfileSubmit}
+          >
+            Update profile
+          </button>
+        </form>
+      </div>
     </>
   );
 }
