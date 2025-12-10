@@ -8,6 +8,7 @@ import {
   useNavigate,
   Link,
 } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +24,15 @@ function Login() {
       console.log("Login successfully", logindata);
       localStorage.setItem("token", response.data.result.token);
       localStorage.setItem("username", logindata.username);
-      navigate("/profile");
+      if (response.data.result.token) {
+        const decoded = jwtDecode(response.data.result.token);
+        const role = decoded.scope;
+        if (role == "Employee") {
+          navigate("/profile");
+        } else {
+          navigate("/AdminPage");
+        }
+      }
     } catch (e) {
       alert("username or password wrong");
       console.error(e);

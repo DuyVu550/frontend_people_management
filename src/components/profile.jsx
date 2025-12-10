@@ -12,7 +12,6 @@ function Profile() {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const API_KEY = import.meta.env.VITE_API_KEY;
-  const avatarUrl = import.meta.env.VITE_AvatarUrl;
   const handelLogout = () => {
     localStorage.clear();
     navigate("/");
@@ -38,10 +37,11 @@ function Profile() {
   const updateProfileSubmit = () => {
     navigate("/updateProfile");
   };
-  localStorage.setItem("age", user.age);
+  localStorage.setItem("Dob", user.dob);
   localStorage.setItem("address", user.address);
   localStorage.setItem("avatar", user.avatar);
   localStorage.setItem("name", user.name);
+  localStorage.setItem("email", user.email);
   return (
     <>
       <div
@@ -50,7 +50,7 @@ function Profile() {
       >
         <form
           className="container mt-100 p-4 rounded shadow bg-white"
-          style={{ width: "400px", height: "450px" }}
+          style={{ width: "400px", height: "500px" }}
         >
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h1 className="fw-bold m-0">Profile</h1>
@@ -73,8 +73,12 @@ function Profile() {
             <span>{user.name}</span>
           </div>
           <div className="mb-2">
-            <span className="fw-bold">Age: </span>
-            <span>{user.age}</span>
+            <span className="fw-bold">Dob: </span>
+            <span>{user.dob}</span>
+          </div>
+          <div className="mb-2">
+            <span className="fw-bold">Email: </span>
+            <span>{user.email}</span>
           </div>
           <div className="mb-2">
             <span className="fw-bold">Address: </span>

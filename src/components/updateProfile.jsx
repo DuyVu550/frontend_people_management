@@ -11,8 +11,9 @@ import { useState } from "react";
 function UpdateProfile() {
   const navigate = useNavigate();
   const [username, setUsername] = useState(localStorage.getItem("username"));
+  const [email, setEmail] = useState(localStorage.getItem("email"));
   const [name, setName] = useState(localStorage.getItem("name"));
-  const [age, setAge] = useState(localStorage.getItem("age"));
+  const [dob, setDob] = useState(localStorage.getItem("Dob"));
   const [address, setAddress] = useState(localStorage.getItem("address"));
   const [avatar, setAvatar] = useState(localStorage.getItem("avatar"));
   const API_KEY = import.meta.env.VITE_API_KEY;
@@ -27,8 +28,9 @@ function UpdateProfile() {
     const token = localStorage.getItem("token");
     const formData = new FormData();
     formData.append("username", username);
+    formData.append("email", email);
     formData.append("name", name);
-    formData.append("age", age);
+    formData.append("dob", dob);
     formData.append("address", address);
     formData.append("avatar", avatar);
     try {
@@ -54,7 +56,7 @@ function UpdateProfile() {
       >
         <form
           className="container mt-100 p-4 rounded shadow bg-white"
-          style={{ width: "500px", height: "750px" }}
+          style={{ width: "500px", height: "850px" }}
         >
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h1 className="fw-bold m-0">Update Profile</h1>
@@ -76,6 +78,16 @@ function UpdateProfile() {
             ></input>
           </div>
           <div className="mb-3">
+            <label className="form-label">Email</label>
+            <input
+              type="email"
+              value={email}
+              className="form-control input-bold"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            ></input>
+          </div>
+          <div className="mb-3">
             <label className="form-label">Name</label>
             <input
               type="text"
@@ -86,12 +98,12 @@ function UpdateProfile() {
             ></input>
           </div>
           <div className="mb-3">
-            <label className="form-label">Age</label>
+            <label className="form-label">Dob</label>
             <input
-              type="text"
-              value={age}
+              type="date"
+              value={dob}
               className="form-control input-bold"
-              onChange={(e) => setAge(e.target.value)}
+              onChange={(e) => setDob(e.target.value)}
               required
             ></input>
           </div>

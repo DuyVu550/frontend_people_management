@@ -11,8 +11,10 @@ import axios from "axios";
 function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [rePassword, setRepassword] = useState("");
+  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [age, setAge] = useState("");
+  const [dob, setDob] = useState("");
   const [address, setAddress] = useState("");
   const [avatar, setAvatar] = useState("");
   const navigate = useNavigate();
@@ -22,8 +24,10 @@ function Register() {
     const formData = new FormData();
     formData.append("username", username);
     formData.append("password", password);
+    formData.append("repassword", rePassword);
+    formData.append("email", email);
     formData.append("name", name);
-    formData.append("age", age);
+    formData.append("dob", dob);
     formData.append("address", address);
     formData.append("avatar", avatar);
     try {
@@ -46,7 +50,7 @@ function Register() {
       >
         <form
           className="container mt-100 p-4 rounded shadow bg-white"
-          style={{ width: "400px", height: "700px" }}
+          style={{ width: "400px", height: "880px" }}
         >
           <h1 className="text-center mb-4">Sign up</h1>
           <div className="mb-3">
@@ -70,6 +74,26 @@ function Register() {
             ></input>
           </div>
           <div className="mb-3">
+            <label className="form-label">RePassword</label>
+            <input
+              type="password"
+              className="form-control input-bold"
+              placeholder="Repassword"
+              onChange={(e) => setRepassword(e.target.value)}
+              required
+            ></input>
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Email</label>
+            <input
+              type="email"
+              className="form-control input-bold"
+              placeholder="Enter Email"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            ></input>
+          </div>
+          <div className="mb-3">
             <label className="form-label">Name</label>
             <input
               type="text"
@@ -80,12 +104,12 @@ function Register() {
             ></input>
           </div>
           <div className="mb-3">
-            <label className="form-label">Age</label>
+            <label className="form-label">Dob</label>
             <input
-              type="text"
+              type="date"
               className="form-control input-bold"
-              placeholder="Enter Age"
-              onChange={(e) => setAge(e.target.value)}
+              placeholder="Enter dob"
+              onChange={(e) => setDob(e.target.value)}
               required
             ></input>
           </div>
