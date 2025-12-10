@@ -40,7 +40,7 @@ function Profile() {
   };
   localStorage.setItem("age", user.age);
   localStorage.setItem("address", user.address);
-  localStorage.setItem("avatar", `${avatarUrl}/${user.avatar}`);
+  localStorage.setItem("avatar", user.avatar);
   localStorage.setItem("name", user.name);
   return (
     <>
@@ -59,7 +59,7 @@ function Profile() {
             </button>
           </div>
           <img
-            src={`${avatarUrl}/${user.avatar}`}
+            src={user.avatar}
             alt=""
             className="rounded-circle d-block mx-auto mb-3"
             style={{ width: "150px", height: "150px" }}

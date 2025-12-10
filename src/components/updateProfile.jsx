@@ -16,7 +16,6 @@ function UpdateProfile() {
   const [address, setAddress] = useState(localStorage.getItem("address"));
   const [avatar, setAvatar] = useState(localStorage.getItem("avatar"));
   const API_KEY = import.meta.env.VITE_API_KEY;
-  const avatarUrl = import.meta.env.VITE_avatarUrl;
   const backSubmit = () => {
     navigate("/Profile");
   };
