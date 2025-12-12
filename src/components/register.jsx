@@ -8,6 +8,25 @@ import {
   Link,
 } from "react-router-dom";
 import axios from "axios";
+function CheckBirthdayYear(dob) {
+  if (!dob) {
+    return "Vui lòng nhập ngày tháng năm sinh";
+  }
+  const birthDate = new Date(dob);
+  const today = new Date();
+  if (birthDate >= today) {
+    return "Ngày tháng năm sinh không vượt quá ngày hiện tại";
+  }
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  if (age < 18) {
+    return "Bạn chưa đủ 18 tuổi";
+  }
+  return null;
+}
 function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,8 +38,21 @@ function Register() {
   const [avatar, setAvatar] = useState("");
   const navigate = useNavigate();
   const API_KEY = import.meta.env.VITE_API_KEY;
+  const birtDateMessage = CheckBirthdayYear(dob);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password.length < 8) {
+      alert("Mật khẩu phải có ít nhất 8 ký tự");
+      return;
+    }
+    if (password !== rePassword) {
+      alert("Password và Repassword không trùng!");
+      return;
+    }
+    if (birtDateMessage) {
+      alert(birtDateMessage);
+      return;
+    }
     const formData = new FormData();
     formData.append("username", username);
     formData.append("password", password);
@@ -32,14 +64,21 @@ function Register() {
     formData.append("avatar", avatar);
     try {
       const response = await axios.post(`${API_KEY}/users/register`, formData);
-      if (response.data.message == "username existed") {
-        alert("username existed");
-        return;
-      }
       alert("Sign in successfully");
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("username", username);
+      localStorage.setItem("email", email);
+      localStorage.setItem("name", name);
+      localStorage.setItem("dob", dob);
+      localStorage.setItem("address", address);
+      localStorage.setItem("avatar", avatar);
       navigate("/profile");
     } catch (e) {
       console.error(e);
+      if (e.response.data.message == "username existed") {
+        alert("username existed");
+        return;
+      }
     }
   };
   return (
@@ -51,6 +90,7 @@ function Register() {
         <form
           className="container mt-100 p-4 rounded shadow bg-white"
           style={{ width: "400px", height: "880px" }}
+          onSubmit={handleSubmit}
         >
           <h1 className="text-center mb-4">Sign up</h1>
           <div className="mb-3">
@@ -129,14 +169,9 @@ function Register() {
               type="file"
               className="form-control input-bold"
               onChange={(e) => setAvatar(e.target.files[0])}
-              required
             ></input>
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary w-100"
-            onClick={handleSubmit}
-          >
+          <button type="submit" className="btn btn-primary w-100">
             Register
           </button>
           <p className="text-center my-2">
